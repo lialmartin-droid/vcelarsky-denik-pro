@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Včelařský deník Pod Prosečí">
+<defs>
+  <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#315C43"/><stop offset="1" stop-color="#1C3629"/></linearGradient>
+  <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7CC81"/><stop offset="1" stop-color="#CF9145"/></linearGradient>
+  <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBF0D6"/><stop offset="1" stop-color="#DAB980"/></linearGradient>
+  <filter id="soft"><feDropShadow dx="0" dy="9" stdDeviation="10" flood-color="#0D2017" flood-opacity=".28"/></filter>
+</defs>
+<rect width="512" height="512" rx="116" fill="url(#green)"/>
+<path d="M-10 361C109 325 122 419 275 379C367 355 421 348 529 384V528H-10Z" fill="#497657" opacity=".5"/>
+<circle cx="395" cy="129" r="81" fill="#E7C47D" opacity=".13"/>
+<g fill="none" stroke="#E8C987" stroke-width="8" stroke-linejoin="round" opacity=".95"><path d="M256 53L419 151V349L256 447L93 349V151Z"/></g>
+<g filter="url(#soft)">
+  <path d="M151 206L256 160L361 206L343 228H169Z" fill="url(#lid)" stroke="#9A6B39" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="171" y="224" width="170" height="141" rx="12" fill="url(#wood)" stroke="#94622E" stroke-width="8"/>
+  <path d="M172 272H340M172 320H340" stroke="#A87039" stroke-width="7" opacity=".72"/>
+  <path d="M195 246V349M317 246V349" stroke="#FDE3AD" opacity=".35" stroke-width="7"/>
+  <rect x="221" y="290" width="70" height="17" rx="8.5" fill="#4A392C"/>
+  <path d="M154 372H358" stroke="#F5E9CD" stroke-width="20" stroke-linecap="round"/>
+</g>
+<!-- Bee above right shoulder of hive -->
+<g transform="translate(354 138) rotate(12)">
+  <ellipse cx="-23" cy="-21" rx="30" ry="19" transform="rotate(-34 -23 -21)" fill="#FFFAE8" opacity=".92"/>
+  <ellipse cx="13" cy="-28" rx="30" ry="19" transform="rotate(30 13 -28)" fill="#FFFAE8" opacity=".92"/>
+  <ellipse cx="-2" cy="8" rx="34" ry="27" fill="#F3C35B" stroke="#483B23" stroke-width="5"/>
+  <path d="M-12 -16V32M8 -16V31" stroke="#493B25" stroke-width="11"/>
+  <circle cx="30" cy="2" r="15" fill="#EFC666" stroke="#493B25" stroke-width="4"/>
+  <circle cx="36" cy="-1" r="3.5" fill="#493B25"/>
+</g>
+<g fill="#E3BC6B" opacity=".95"><circle cx="133" cy="147" r="7"/><circle cx="113" cy="178" r="4"/><circle cx="389" cy="292" r="6"/><circle cx="408" cy="315" r="3"/></g>
+</svg>

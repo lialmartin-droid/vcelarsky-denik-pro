@@ -32,7 +32,7 @@
 <div class="app">
 <header class="topbar">
  <div class="branding"><div class="brandmark"><svg style="width:34px;height:34px"><use href="#i-bee"/></svg></div><div><div class="brandtitle">Pod Prosečí</div><div class="brandsub">VČELAŘSKÝ DENÍK</div></div></div>
- <div class="toplinks"><button data-page="home" class="active">Přehled</button><button data-page="hives">Včelstva</button><button data-page="record">Zápisy</button><button data-page="history">Historie</button><button data-page="costs">Finance</button></div>
+ <div class="toplinks"><button data-page="home" class="active">Přehled</button><button data-page="hives">Včelstva</button><button data-page="record">Zápisy</button><button data-page="history">Historie</button><button data-page="costs">Finance</button><button data-page="backups">Zálohy</button></div>
  <div class="season">Sezóna 2026</div>
 </header>
 <main>
@@ -42,6 +42,10 @@
    <div class="hero-copy"><div class="eyebrow">Přímo od našich včel · Pod Prosečí</div><div class="decor" style="margin-top:13px">✤</div><h1 class="hero-title"><span>Moje malá</span> <span>včelnice</span></h1><p>Každé včelstvo má svůj příběh. Vše důležité přehledně a na jednom místě.</p><button class="btn" data-action="record"><svg><use href="#i-plus"/></svg> Přidat zápis</button></div>
   </div>
   <div class="stats finance-stats"><div class="stat"><strong>4</strong><small>Včelstva</small></div><button type="button" class="stat stat-action" data-page="costs"><strong id="stats-cost-total">0 Kč</strong><small>Celkem utraceno</small></button><button type="button" class="stat stat-action" data-page="costs"><strong id="stats-sales-total">0 Kč</strong><small>Prodáno medu</small></button><button type="button" class="stat stat-action" data-page="costs"><strong id="stats-net-total">0 Kč</strong><small>Rozdíl (tržby − výdaje)</small></button></div>
+  <button class="backup-shortcut" type="button" data-page="backups" aria-label="Otevřít zálohování a obnovení dat">
+    <span class="backup-shortcut-icon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 18v3h14v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span>
+    <span><strong>Zálohy a obnovení dat</strong><small>Načíst starou zálohu nebo stáhnout novou</small></span><span class="backup-arrow" aria-hidden="true">→</span>
+  </button>
   <div class="homegrid">
    <div><div class="heading"><div><div class="overline">Moje hospodářství</div><h2>Naše úly</h2></div><button class="subtle-link" data-page="hives">Všechny úly →</button></div><div class="hives" id="home-hives"></div></div>
    <div><div class="heading"><div><div class="overline">Jedním klepnutím</div><h2>Rychlé záznamy</h2></div></div><aside class="aside"><small>CO CHCEŠ ZAPSAT?</small><h2>Malý zápis.<br>Velký přehled.</h2><p>Bez dlouhých formulářů. Vyber úl, činnost a hotovo.</p><div class="quickrow"><button data-type="Kontrola"><svg><use href="#i-note"/></svg> Kontrola</button><button data-type="Krmení"><svg><use href="#i-drop"/></svg> Krmení</button><button data-type="Léčení"><svg><use href="#i-heart"/></svg> Léčení</button><button data-type="Vytáčení"><svg><use href="#i-hex"/></svg> Vytáčení</button></div></aside></div>
@@ -88,17 +92,40 @@
    <section class="cost-panel"><div class="eyebrow">Přehled výdajů</div><h2>Výdaje</h2><div class="cost-entries" id="cost-entries"></div></section>
    <section class="cost-panel"><div class="eyebrow">Přehled tržeb</div><h2>Prodeje medu</h2><div class="cost-entries" id="sale-entries"></div></section>
   </div>
-  <section class="fin-backup"><div><div class="eyebrow">Přenos dat</div><h2>Starší záznamy a zálohy</h2><p>Nahraj JSON zálohu z původního deníku 4.8.x – načtou se její výdaje a uskutečněné prodeje medu. Původní položky bez přiřazeného úlu zůstanou mezi společnými výdaji. Zbytek dat v záloze se nemění.</p></div>
-   <div class="fin-actions"><label class="import-label" for="import-finance">↑ Načíst starou JSON zálohu</label><input type="file" id="import-finance" accept=".json,application/json" hidden><button type="button" class="btn ghost" id="export-finance">↓ Stáhnout zálohu financí</button></div><p id="import-message" role="status" aria-live="polite" class="cost-notice">Záznamy se ukládají jen do tohoto prohlížeče. Při změně zařízení si stáhni zálohu.</p>
-  </section>
+  <div class="finance-backup-link"><div><strong>Potřebuješ obnovit data?</strong><p>Zálohy jsou nyní v samostatné záložce.</p></div><button type="button" class="btn" data-page="backups">Otevřít zálohy →</button></div>
  </section>
+<section id="page-backups" class="page">
+  <div class="secondary-top backup-page-heading"><div><div class="eyebrow">Zachování tvých záznamů</div><h1>Zálohy a obnovení</h1><p>Stáhni si kopii finanční evidence nebo nahraj starší zálohu.</p></div></div>
+  <div class="backup-main">
+   <section class="backup-action-card">
+    <div class="backup-number">01</div>
+    <div class="eyebrow">Načtení dat</div>
+    <h2>Obnovit ze zálohy</h2>
+    <p>Vyber soubor <strong>.json</strong> ze starého deníku 4.8.x nebo zálohu financí z verzí 5.2/5.3.</p>
+    <label for="import-finance" class="backup-file-label">Vyber záložní soubor (JSON)</label>
+    <input type="file" id="import-finance" class="backup-file-input" accept=".json,application/json" aria-describedby="backup-restore-help" />
+    <p id="backup-restore-help" class="backup-limitation"><strong>Co se obnoví:</strong> výdaje a prodaný med. Úly, kontroly, léčení a další záznamy ze starého deníku zatím tato testovací verze nepřenáší. Původní JSON si proto ponech.</p>
+    <p id="import-message" class="backup-result" role="status" aria-live="polite">Po výběru souboru se zobrazí potvrzení před změnou dat.</p>
+   </section>
+   <section class="backup-action-card backup-export-card">
+    <div class="backup-number">02</div>
+    <div class="eyebrow">Uložení dat</div>
+    <h2>Stáhnout zálohu</h2>
+    <p>Stáhni aktuální <strong>výdaje a prodeje medu</strong> do souboru JSON. Později je můžeš znovu obnovit.</p>
+    <button type="button" class="btn amber backup-export-button" id="export-finance">↓ Stáhnout zálohu financí (.json)</button>
+    <p class="backup-limitation">Tento export obsahuje finance aktuální verze, nikoli kompletní původní včelařský deník.</p>
+   </section>
+  </div>
+  <div class="backup-reminder"><strong>Upozornění k prohlížeči</strong><p>Údaje se zatím ukládají místně. Pokud otevřeš aplikaci na jiné adrese, zařízení nebo promažeš data prohlížeče, nemusí se objevit. Proto si soubor JSON uchovej mimo zařízení.</p></div>
+</section>
 <section id="page-detail" class="page"><button class="back" data-page="hives">← Zpět k úlům</button><div class="secondary-top" style="margin-top:11px"><div><div class="eyebrow">Karta včelstva</div><h1 id="detail-name">Úl č. 1</h1><p id="detail-place">Stanoviště u domu</p></div></div><div class="detail"><h3>Rychlý přehled</h3><p class="detail-cost">Náklady evidované přímo na tomto úlu: <strong id="detail-cost-value">0 Kč</strong></p><button class="btn amber" data-page="costs">+ Zapsat výdaj na úl</button><p>Matka, zásoby, síla včelstva a poslední kontrola. Jen to důležité, podrobnosti jsou až po rozkliknutí.</p><button class="btn" data-action="record"><svg><use href="#i-plus"/></svg> Přidat zápis k úlu</button></div></section>
 </main>
 <nav class="bottomnav" aria-label="Hlavní navigace">
  <button data-page="home" class="selected"><svg><use href="#i-house"/></svg><span>Přehled</span></button>
  <button data-page="hives"><svg><use href="#i-hex"/></svg><span>Úly</span></button>
  <button data-page="record"><span class="navplus"><svg><use href="#i-plus"/></svg></span><span>Zápis</span></button>
- <button data-page="history"><svg><use href="#i-book"/></svg><span>Historie</span></button>
+ <button data-page="costs"><svg><use href="#i-hex"/></svg><span>Finance</span></button>
+ <button data-page="backups"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 18v3h14v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Zálohy</span></button>
 </nav>
 </div>
 <script src="js/app.js"></script>

@@ -1,14 +1,11 @@
-VČELAŘSKÝ DENÍK 5.3.1 – NÁVRH DESIGNU + HOSPODAŘENÍ + IKONA
+VČELAŘSKÝ DENÍK 5.3.2 – VIDITELNÉ ZÁLOHY A OBNOVENÍ
 
-• Pro rychlou zkoušku otevři NAHLED_JEDEN_SOUBOR.html. Obrázek včelnice je přímo uvnitř souboru.
-• Pro modularní variantu otevři index.html ze složky (css, js a assets nech vedle něj).
-• Úvodní přehled zobrazuje CELKEM náklady, TRŽBY ZA MED a ROZDÍL (tržby minus výdaje) za celou dobu.
-• Finance: zapisuj výdaje jednotlivých úlů nebo společné náklady. Prodej medu zadáš počet sklenic × cenu za kus. Výdaje i tržby je možné mazat.
-• IMPORT: exportuj původní JSON zálohu z deníku 4.8.x a nahraj ji v části Finance -> Starší záznamy a zálohy. Z této zálohy se načtou data expenses a jarSales, ostatní části zálohy se nepřepisují. Import podruhé neduplikuje stejné položky (předchozí import stejného typu se nahradí).
-• Záloha financí se exportuje samostatně, vždy ji ulož před výměnou zařízení.
-• Starší náklady vytvořené v návrhu 5.2 se v témže prohlížeči automaticky převezmou, pokud dosud neexistují uložené finance verze 5.3.
-• Upozornění: jedná se o testovací VIZUÁLNÍ návrh, nikoliv kompletní přepis původního deníku. Úly a běžné události jsou demonstrační. Výdaje a prodeje se ukládají jen v místním prohlížeči. Výsledný rozdíl je peněžní bilance, nikoliv účetní zisk.
-• Zatím nedoporučujeme nahradit tímto návrhem používanou aplikaci na GitHubu.
+1. Otevři NAHLED_JEDEN_SOUBOR.html pro offline vyzkoušení nebo index.html pro modulární variantu.
+2. Zálohování najdeš přímo v dolním mobilním menu pod „Zálohy“, nahoře na PC nebo přes tlačítko „Zálohy a obnovení dat“ na úvodní stránce.
+3. „Obnovit ze zálohy“: Vyber soubor .json ze starého Včelařského deníku 4.8.x nebo finanční JSON z 5.2/5.3. Potvrď import.
+4. „Stáhnout zálohu“: uloží soubor JSON s výdaji a prodeji medu, který lze později obnovit.
 
-• NOVĚ: ikona aplikace pro záložku a přidání na plochu iPhonu (assets/icons). Modulární index.html používá manifest.webmanifest; samostatný HTML náhled má malou ikonu vloženou přímo v sobě.
-• Pokud budeš přidávat aplikaci na plochu z iPhonu, otevři stránku přes HTTPS (např. na GitHub Pages) a v Safari použij Sdílet → Přidat na plochu. U lokálního HTML může být tato funkce omezená.
+DŮLEŽITÉ: Z původního deníku se nyní převádějí pouze náklady (expenses) a prodaný med (jarSales). Tato testovací verze NENÍ plnou náhradou deníku 4.8.x. Staré úly, kontroly, léčení, další historii a nastavení neumí zatím importovat. PŮVODNÍ JSON ZÁLOHU SI PONECHEJ. Záloha 5.3.2 obsahuje pouze finance.
+
+Data se ukládají v lokálním úložišti prohlížeče na dané adrese. Samostatný soubor HTML a GitHub Pages mohou mít oddělená uložiště.
+Ikona pro iPhone a prohlížeč zůstává zachována.

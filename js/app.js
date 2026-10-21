@@ -48,7 +48,7 @@ const types=['Kontrola','Krmení','Léčení','Vytáčení'];const typeIcons=['n
 function renderTypes(){$('types').innerHTML=types.map((t,i)=>`<button class="type ${recordType===t?'selected':''}" data-type="${t}">${icon(typeIcons[i])}${t}</button>`).join('');$('hiveselect').innerHTML=hives.map((h,i)=>`<button class="${chosenHive===i?'selected':''}" data-choose="${i}">${esc(h.name)}</button>`).join('');$('quantity-wrap').style.display=recordType==='Krmení'||recordType==='Vytáčení'?'block':'none';$('statusselect').style.display=recordType==='Kontrola'?'flex':'none';$('quantity-wrap').querySelector('label').textContent=recordType==='Vytáčení'?'Množství medu (kg)':'Množství krmiva (kg)'}
 function updateSalePreview(){const count=Number($('sale-count').value),price=Number($('sale-price').value);$('sale-preview').textContent=Number.isInteger(count)&&count>0&&validMoney(price)?czk(asMoney(count*price)):'0 Kč'}
 function exportBackup(){const blob=new Blob([JSON.stringify({type:'vcelarsky-denik-finance-v5-3',version:3,createdAt:new Date().toISOString(),expenses,sales},null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='vcelarsky-denik-finance-'+yyyy_mm_dd()+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
-async function importBackup(file){const notice=$('import-message');try{
+async function importBackup(file){const notice=$('import-message');notice.textContent='Načítám zálohu…';try{
  const raw=JSON.parse((await file.text()).replace(/^\uFEFF/,''));if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new Error('Soubor neobsahuje objekt JSON.');
  let newExpenses=[],newSales=[],kind;
  if(raw.type==='vcelarsky-denik-finance-v5-3'){
@@ -61,13 +61,13 @@ async function importBackup(file){const notice=$('import-message');try{
    newExpenses=raw.expenses.map(e=>normalizeCost({id:'legacy-cost-'+e.id,hive:-1,category:e.category||'Ostatní',amount:e.cost,note:e.name?`${e.name}${e.note?' – '+e.note:''}`:e.note,date:e.date,source:'legacy'})).filter(Boolean);
    newSales=raw.jarSales.map(e=>normalizeSale({id:'legacy-sale-'+e.id,count:e.count,price:e.price,date:e.date,note:e.honeyType||'',source:'legacy'})).filter(Boolean);
  }else throw new Error('Soubor není rozpoznanou zálohou včelařského deníku.');
- if(newExpenses.length===0&&newSales.length===0)throw new Error('V záloze nejsou žádné finanční položky.');
+ if(newExpenses.length===0&&newSales.length===0)throw new Error('V záloze nejsou žádné finanční položky. Ostatní údaje zatím nelze do tohoto návrhu importovat.');
  const message=kind==='full'?`Obnovit ${newExpenses.length} výdajů a ${newSales.length} prodejů? Aktuální finanční data se nahradí zálohou.`:`Načíst ${newExpenses.length} výdajů a ${newSales.length} prodejů? Dříve importované položky ze stejného typu zálohy se nahradí, ručně přidané zůstanou.`;
  if(!confirm(message))return;
  const prevExp=expenses,prevSales=sales;
  if(kind==='full'){expenses=newExpenses;sales=newSales}else{const src=kind==='legacy'?'legacy':'import-v52';expenses=[...expenses.filter(x=>x.source!==src),...newExpenses];if(kind==='legacy')sales=[...sales.filter(x=>x.source!=='legacy'),...newSales]}
  if(!saveStored()){expenses=prevExp;sales=prevSales;throw new Error('Prohlížeč nedovolil uložit data. Nic se nepřepsalo.');}
- renderCosts();notice.textContent=`Načtené výdaje: ${newExpenses.length}; prodeje: ${newSales.length}. Celkový rozdíl: ${czk(balance())}.`;
+ renderCosts();notice.textContent=`Obnova proběhla. Výdaje: ${newExpenses.length}; prodeje: ${newSales.length}. Celkový rozdíl: ${czk(balance())}.`;
  }catch(err){notice.textContent='Import se nezdařil: '+err.message;}finally{$('import-finance').value=''}}
 const costHiveSelect=$('cost-hive');
 costHiveSelect.innerHTML='<option value="-1">Společný náklad (bez konkrétního úlu)</option>'+hives.map((h,i)=>`<option value="${i}">${esc(h.name)} – ${esc(h.place)}</option>`).join('');

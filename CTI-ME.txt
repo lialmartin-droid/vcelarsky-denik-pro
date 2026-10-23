@@ -1,11 +1,21 @@
-VČELAŘSKÝ DENÍK 5.3.2 – VIDITELNÉ ZÁLOHY A OBNOVENÍ
+VČELAŘSKÝ DENÍK 5.3.3 – SPRÁVA ÚLŮ
 
-1. Otevři NAHLED_JEDEN_SOUBOR.html pro offline vyzkoušení nebo index.html pro modulární variantu.
-2. Zálohování najdeš přímo v dolním mobilním menu pod „Zálohy“, nahoře na PC nebo přes tlačítko „Zálohy a obnovení dat“ na úvodní stránce.
-3. „Obnovit ze zálohy“: Vyber soubor .json ze starého Včelařského deníku 4.8.x nebo finanční JSON z 5.2/5.3. Potvrď import.
-4. „Stáhnout zálohu“: uloží soubor JSON s výdaji a prodeji medu, který lze později obnovit.
+JAK TO OTEVŘÍT
+- NAHLED_JEDEN_SOUBOR.html: samostatný HTML soubor pro vyzkoušení, včetně kresleného obrázku.
+- index.html: hlavní modulární aplikace (spolu se složkami css, js a assets). Celý obsah ZIPu lze nahrát do kořenové složky GitHub Pages.
 
-DŮLEŽITÉ: Z původního deníku se nyní převádějí pouze náklady (expenses) a prodaný med (jarSales). Tato testovací verze NENÍ plnou náhradou deníku 4.8.x. Staré úly, kontroly, léčení, další historii a nastavení neumí zatím importovat. PŮVODNÍ JSON ZÁLOHU SI PONECHEJ. Záloha 5.3.2 obsahuje pouze finance.
+SPRÁVA ÚLŮ
+- Záložka Úly -> Přidat úl: název a stanoviště.
+- U každé karty je Upravit (název/stanoviště) a Odebrat.
+- Odebrání úl ARCHIVUJE, NEODSTRAŇUJE TRVALE: náklady a zápisy zůstanou. Archivované úly můžeš znovu aktivovat přes Obnovit úl.
+- Náklady i záznamy používají neměnné ID úlu, takže přejmenování nebo změna stanoviště nepřehodí finance mezi úly.
+- Nově se také ukládají rychlé zápisy kontrol, krmení, léčení a vytáčení v aktuální aplikaci.
 
-Data se ukládají v lokálním úložišti prohlížeče na dané adrese. Samostatný soubor HTML a GitHub Pages mohou mít oddělená uložiště.
-Ikona pro iPhone a prohlížeč zůstává zachována.
+ZÁLOHY
+- Záložka Zálohy -> Stáhnout celou zálohu (.json): export úlů, archivovaných úlů, aktuálních zápisů, výdajů a prodejů medu.
+- Obnovit ze zálohy podporuje kompletní zálohu z 5.3.3 i starší finanční zálohy.
+- Staré verze 4.8.x: zatím lze převést POUZE náklady a prodeje medu. Úly, staré kontroly, léčení ani další původní data z 4.8.x dosud nejdou přenést.
+- PŮVODNÍ JSON SI PONECHEJ a před nahrazením používané aplikace si vždy vytvoř zálohu.
+
+Ukládání probíhá lokálně v prohlížeči a váže se na adresu webu. Data z místního HTML nejsou automaticky synchronizována na GitHub Pages ani do jiného zařízení.
+Ikona aplikace a kreslený obrázek včelnice zůstávají součástí projektu.
